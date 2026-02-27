@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { projectsAPI } from '@/lib/api';
 
 export default function ProjectCreationForm({ onSuccess }) {
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [applicationType, setApplicationType] = useState('web');
   const [enableSupabase, setEnableSupabase] = useState(false);
@@ -15,6 +16,11 @@ export default function ProjectCreationForm({ onSuccess }) {
     setError('');
 
     // Validation
+    if (!name.trim()) {
+      setError('Please provide a name for your project');
+      return;
+    }
+
     if (!description.trim()) {
       setError('Please provide a description for your project');
       return;
@@ -24,12 +30,14 @@ export default function ProjectCreationForm({ onSuccess }) {
 
     try {
       const project = await projectsAPI.create({
+        name: name.trim(),
         description: description.trim(),
         application_type: applicationType,
         enable_supabase: enableSupabase,
       });
 
       // Reset form
+      setName('');
       setDescription('');
       setApplicationType('web');
       setEnableSupabase(false);
@@ -47,6 +55,22 @@ export default function ProjectCreationForm({ onSuccess }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Project Name */}
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          Project Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="E.g., Task Manager App"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          disabled={loading}
+        />
+      </div>
+
       {/* Description */}
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">

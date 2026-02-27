@@ -48,12 +48,16 @@ async function apiRequest(endpoint, options = {}) {
   });
 
   if (response.status === 401) {
-    // Token expired or invalid
-    removeAuthToken();
-    if (typeof window !== 'undefined') {
-      window.location.href = '/auth/login';
+    // Token expired or invalid - but don't redirect if this is a login/signup request
+    const isAuthEndpoint = endpoint.startsWith('/auth/login') || endpoint.startsWith('/auth/signup');
+    
+    if (!isAuthEndpoint) {
+      removeAuthToken();
+      if (typeof window !== 'undefined') {
+        window.location.href = '/auth/login';
+      }
+      throw new Error('Session expired. Please login again.');
     }
-    throw new Error('Session expired. Please login again.');
   }
 
   if (!response.ok) {
