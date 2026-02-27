@@ -98,6 +98,31 @@ export const authAPI = {
   },
 };
 
+// Users API
+export const usersAPI = {
+  getCurrentUser: async () => {
+    return apiRequest('/users/me');
+  },
+
+  updateEmail: async (email) => {
+    return apiRequest('/users/me/email', {
+      method: 'PUT',
+      body: JSON.stringify({ email }),
+    });
+  },
+
+  updatePassword: async (currentPassword, newPassword) => {
+    return apiRequest('/users/me/password', {
+      method: 'PUT',
+      body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
+    });
+  },
+
+  getUsageHistory: async () => {
+    return apiRequest('/users/me/usage');
+  },
+};
+
 // Projects API
 export const projectsAPI = {
   create: async (projectData) => {

@@ -45,7 +45,7 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
           <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Build Applications with AI
+            Your Personal Software Engineer
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Workerscraft uses a Master Architect Agent to autonomously build production-ready
@@ -92,7 +92,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Pricing Tiers */}
+        {/* Pricing Tiers Preview */}
         <div className="mt-20">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Simple, Transparent Pricing
@@ -125,7 +125,7 @@ export default function Home() {
                 Popular
               </div>
               <h4 className="text-2xl font-bold text-gray-900 mb-2">Starter</h4>
-              <p className="text-4xl font-bold text-gray-900 mb-4">$29<span className="text-lg text-gray-600">/mo</span></p>
+              <p className="text-4xl font-bold text-gray-900 mb-4">$30<span className="text-lg text-gray-600">/mo</span></p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-gray-600">
                   <span className="mr-2">✓</span> 10 Builds/month
@@ -141,13 +141,13 @@ export default function Home() {
                 href="/auth/signup"
                 className="block w-full text-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Start Free Trial
+                Get Started
               </Link>
             </div>
 
             <div className="bg-white p-8 rounded-lg shadow-md border-2 border-gray-200">
               <h4 className="text-2xl font-bold text-gray-900 mb-2">Max</h4>
-              <p className="text-4xl font-bold text-gray-900 mb-4">$99<span className="text-lg text-gray-600">/mo</span></p>
+              <p className="text-4xl font-bold text-gray-900 mb-4">$100<span className="text-lg text-gray-600">/mo</span></p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-gray-600">
                   <span className="mr-2">✓</span> Unlimited Builds
@@ -167,6 +167,14 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/pricing"
+              className="inline-block text-blue-600 hover:text-blue-700 font-medium"
+            >
+              View detailed pricing and features →
+            </Link>
+          </div>
         </div>
       </main>
 
@@ -174,7 +182,7 @@ export default function Home() {
       <footer className="bg-gray-50 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-gray-600">
-            © 2026 Workerscraft. Build applications with AI.
+            © 2026 Workerscraft.
           </p>
         </div>
       </footer>
