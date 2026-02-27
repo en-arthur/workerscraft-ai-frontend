@@ -174,7 +174,7 @@ export default function ProjectDetailPage() {
                     onClick={() => setDebuggerEnabled(!debuggerEnabled)}
                     className={`px-4 py-2 font-medium rounded-lg transition-colors flex items-center gap-2 ${
                       debuggerEnabled
-                        ? 'bg-green-600 text-white hover:bg-green-700'
+                        ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:from-cyan-500 hover:to-blue-500'
                         : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                     }`}
                     title="Toggle Visual Debugger"

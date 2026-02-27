@@ -57,7 +57,7 @@ export default function ProjectCreationForm({ onSuccess }) {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Project Name */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
           Project Name
         </label>
         <input
@@ -66,14 +66,14 @@ export default function ProjectCreationForm({ onSuccess }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="E.g., Task Manager App"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           disabled={loading}
         />
       </div>
 
       {/* Description */}
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-2">
           Describe your application
         </label>
         <textarea
@@ -82,14 +82,14 @@ export default function ProjectCreationForm({ onSuccess }) {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="E.g., A task management app with user authentication and real-time updates"
           rows={4}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+          className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
           disabled={loading}
         />
       </div>
 
       {/* Application Type Toggle */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">
+        <label className="block text-sm font-medium text-gray-300 mb-3">
           Application Type
         </label>
         <div className="flex gap-3">
@@ -99,8 +99,8 @@ export default function ProjectCreationForm({ onSuccess }) {
             disabled={loading}
             className={`flex-1 px-4 py-3 rounded-lg border-2 font-medium transition-colors ${
               applicationType === 'web'
-                ? 'border-blue-500 bg-blue-50 text-blue-700'
-                : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
+                ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400'
+                : 'border-gray-700 bg-gray-800 text-gray-400 hover:border-gray-600'
             }`}
           >
             Web Application
@@ -111,8 +111,8 @@ export default function ProjectCreationForm({ onSuccess }) {
             disabled={loading}
             className={`flex-1 px-4 py-3 rounded-lg border-2 font-medium transition-colors ${
               applicationType === 'mobile'
-                ? 'border-blue-500 bg-blue-50 text-blue-700'
-                : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
+                ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400'
+                : 'border-gray-700 bg-gray-800 text-gray-400 hover:border-gray-600'
             }`}
           >
             Mobile Application
@@ -121,9 +121,9 @@ export default function ProjectCreationForm({ onSuccess }) {
       </div>
 
       {/* Supabase Toggle */}
-      <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+      <div className="flex items-center justify-between p-4 bg-gray-800 rounded-lg border border-gray-700">
         <div>
-          <label htmlFor="supabase-toggle" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="supabase-toggle" className="block text-sm font-medium text-gray-300">
             Enable Supabase Backend
           </label>
           <p className="text-xs text-gray-500 mt-1">
@@ -138,7 +138,7 @@ export default function ProjectCreationForm({ onSuccess }) {
           onClick={() => setEnableSupabase(!enableSupabase)}
           disabled={loading}
           className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-            enableSupabase ? 'bg-blue-600' : 'bg-gray-300'
+            enableSupabase ? 'bg-gradient-to-r from-blue-600 to-cyan-600' : 'bg-gray-700'
           }`}
         >
           <span
@@ -151,7 +151,7 @@ export default function ProjectCreationForm({ onSuccess }) {
 
       {/* Error Message */}
       {error && (
-        <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+        <div className="p-3 bg-red-900/50 border border-red-700 rounded-lg text-sm text-red-300">
           {error}
         </div>
       )}
@@ -160,7 +160,7 @@ export default function ProjectCreationForm({ onSuccess }) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium rounded-lg hover:from-blue-500 hover:to-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         {loading ? 'Creating Project...' : 'Create Project'}
       </button>

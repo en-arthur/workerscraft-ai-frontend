@@ -190,22 +190,22 @@ export default function SettingsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-600">Loading...</div>
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+        <div className="text-gray-400">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-950">
       {/* Header */}
-      <header className="bg-white shadow-sm">
+      <header className="bg-gray-900 shadow-sm border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Settings</h1>
             <button
               onClick={() => router.push('/dashboard')}
-              className="px-4 py-2 text-gray-700 hover:text-gray-900"
+              className="px-4 py-2 text-gray-300 hover:text-white"
             >
               Back to Dashboard
             </button>
@@ -228,20 +228,20 @@ export default function SettingsPage() {
         )}
 
         {/* Account Information */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Account Information</h2>
+        <div className="bg-gray-900 rounded-lg shadow-md p-6 mb-6 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4">Account Information</h2>
           <div className="space-y-3">
             <div>
-              <span className="text-sm font-medium text-gray-600">Email:</span>
-              <span className="ml-2 text-gray-900">{user?.email}</span>
+              <span className="text-sm font-medium text-gray-400">Email:</span>
+              <span className="ml-2 text-white">{user?.email}</span>
             </div>
             <div>
-              <span className="text-sm font-medium text-gray-600">Subscription Tier:</span>
-              <span className="ml-2 text-gray-900 font-semibold">{getTierDisplayName(user?.subscription_tier)}</span>
+              <span className="text-sm font-medium text-gray-400">Subscription Tier:</span>
+              <span className="ml-2 text-white font-semibold">{getTierDisplayName(user?.subscription_tier)}</span>
             </div>
             <div>
-              <span className="text-sm font-medium text-gray-600">Member Since:</span>
-              <span className="ml-2 text-gray-900">
+              <span className="text-sm font-medium text-gray-400">Member Since:</span>
+              <span className="ml-2 text-white">
                 {user?.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
               </span>
             </div>
@@ -249,13 +249,13 @@ export default function SettingsPage() {
         </div>
 
         {/* Billing Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Billing & Usage</h2>
+        <div className="bg-gray-900 rounded-lg shadow-md p-6 mb-6 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4">Billing & Usage</h2>
           
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-600">Builds Remaining:</span>
-              <span className="text-2xl font-bold text-blue-600">
+              <span className="text-sm font-medium text-gray-400">Builds Remaining:</span>
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 {user?.builds_remaining === null ? '∞' : user?.builds_remaining}
               </span>
             </div>
@@ -269,11 +269,11 @@ export default function SettingsPage() {
           {/* Usage History */}
           {usage.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">Recent Usage</h3>
+              <h3 className="text-sm font-medium text-gray-300 mb-3">Recent Usage</h3>
               <div className="space-y-2">
                 {usage.slice(0, 5).map((item, index) => (
-                  <div key={index} className="flex items-center justify-between text-sm py-2 border-b border-gray-100">
-                    <span className="text-gray-600">{item.project_name || 'Project'}</span>
+                  <div key={index} className="flex items-center justify-between text-sm py-2 border-b border-gray-800">
+                    <span className="text-gray-400">{item.project_name || 'Project'}</span>
                     <span className="text-gray-500">{new Date(item.timestamp).toLocaleDateString()}</span>
                   </div>
                 ))}
@@ -282,15 +282,15 @@ export default function SettingsPage() {
           )}
 
           {/* Upgrade/Downgrade Options */}
-          <div className="border-t border-gray-200 pt-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-4">Manage Subscription</h3>
+          <div className="border-t border-gray-800 pt-6">
+            <h3 className="text-sm font-medium text-gray-300 mb-4">Manage Subscription</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {user?.subscription_tier !== 'starter' && (
                 <a
                   href={getPolarCheckoutUrl('starter')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-3 bg-blue-600 text-white text-center font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  className="block px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-center font-medium rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-colors"
                 >
                   {user?.subscription_tier === 'free' ? 'Upgrade to Starter' : 'Downgrade to Starter'}
                 </a>
@@ -300,7 +300,7 @@ export default function SettingsPage() {
                   href={getPolarCheckoutUrl('max')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-3 bg-gray-900 text-white text-center font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                  className="block px-4 py-3 bg-gray-800 text-white text-center font-medium rounded-lg hover:bg-gray-700 transition-colors"
                 >
                   Upgrade to Max
                 </a>
@@ -310,11 +310,11 @@ export default function SettingsPage() {
         </div>
 
         {/* Update Email */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Update Email</h2>
+        <div className="bg-gray-900 rounded-lg shadow-md p-6 mb-6 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4">Update Email</h2>
           <form onSubmit={handleEmailUpdate} className="space-y-4">
             <div>
-              <label htmlFor="new-email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="new-email" className="block text-sm font-medium text-gray-300 mb-1">
                 New Email Address
               </label>
               <input
@@ -322,14 +322,14 @@ export default function SettingsPage() {
                 type="email"
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={emailLoading}
               />
             </div>
             <button
               type="submit"
               disabled={emailLoading}
-              className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {emailLoading ? 'Updating...' : 'Update Email'}
             </button>
@@ -337,11 +337,11 @@ export default function SettingsPage() {
         </div>
 
         {/* Update Password */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Update Password</h2>
+        <div className="bg-gray-900 rounded-lg shadow-md p-6 mb-6 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4">Update Password</h2>
           <form onSubmit={handlePasswordUpdate} className="space-y-4">
             <div>
-              <label htmlFor="current-password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="current-password" className="block text-sm font-medium text-gray-300 mb-1">
                 Current Password
               </label>
               <input
@@ -349,12 +349,12 @@ export default function SettingsPage() {
                 type="password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={passwordLoading}
               />
             </div>
             <div>
-              <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="new-password" className="block text-sm font-medium text-gray-300 mb-1">
                 New Password
               </label>
               <input
@@ -362,13 +362,13 @@ export default function SettingsPage() {
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="At least 8 characters"
                 disabled={passwordLoading}
               />
             </div>
             <div>
-              <label htmlFor="confirm-new-password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="confirm-new-password" className="block text-sm font-medium text-gray-300 mb-1">
                 Confirm New Password
               </label>
               <input
@@ -376,14 +376,14 @@ export default function SettingsPage() {
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={passwordLoading}
               />
             </div>
             <button
               type="submit"
               disabled={passwordLoading}
-              className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {passwordLoading ? 'Updating...' : 'Update Password'}
             </button>
@@ -391,8 +391,8 @@ export default function SettingsPage() {
         </div>
 
         {/* Logout */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Account Actions</h2>
+        <div className="bg-gray-900 rounded-lg shadow-md p-6 border border-gray-800">
+          <h2 className="text-xl font-semibold text-white mb-4">Account Actions</h2>
           <button
             onClick={handleLogout}
             className="px-6 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"

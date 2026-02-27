@@ -33,15 +33,15 @@ export default function NewProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-950">
       {/* Header */}
-      <header className="bg-white shadow-sm">
+      <header className="bg-gray-900 shadow-sm border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">Workerscraft</h1>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Workerscraft</h1>
             <button
               onClick={() => router.push('/dashboard')}
-              className="px-4 py-2 text-gray-700 hover:text-gray-900"
+              className="px-4 py-2 text-gray-300 hover:text-white"
             >
               Back to Dashboard
             </button>
@@ -51,10 +51,10 @@ export default function NewProjectPage() {
 
       {/* Main Content */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="bg-gray-900 rounded-lg shadow-lg p-8 border border-gray-800">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Create New Project</h2>
-            <p className="text-gray-600">
+            <h2 className="text-2xl font-bold text-white mb-2">Create New Project</h2>
+            <p className="text-gray-400">
               Describe your application and let the Master Architect Agent build it for you.
             </p>
           </div>
