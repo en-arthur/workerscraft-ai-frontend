@@ -75,7 +75,12 @@ export default function WorkspacePage() {
 
   // WebSocket connection for progress feed
   useEffect(() => {
-    if (!projectId) return;
+    // Don't connect WebSocket if:
+    // 1. No projectId
+    // 2. There's an error (project not found, etc.)
+    // 3. Project hasn't loaded yet (loading state)
+    // 4. Project loaded but doesn't exist
+    if (!projectId || error || loading || !project) return;
 
     const token = getAuthToken();
     const wsUrl = `ws://127.0.0.1:8000/ws/projects/${projectId}/progress${token ? `?token=${token}` : ''}`;
@@ -147,7 +152,7 @@ export default function WorkspacePage() {
     return () => {
       if (ws) ws.close();
     };
-  }, [projectId]);
+  }, [projectId, error, loading, project]); // Only connect after project successfully loads
 
   // Update build status based on events
   useEffect(() => {
@@ -202,7 +207,14 @@ export default function WorkspacePage() {
         setTimeout(() => handleSandboxExpired(), 100);
       }
     } catch (err) {
-      setError(err.message || 'Failed to load project');
+      const errorMessage = err.message || 'Failed to load project';
+      setError(errorMessage);
+      
+      // If project not found (404), redirect to dashboard immediately
+      if (errorMessage.includes('404') || errorMessage.includes('not found') || errorMessage.includes('Project not found')) {
+        console.log('[Workspace] Project not found, redirecting to dashboard...');
+        router.push('/dashboard'); // Immediate redirect to stop WebSocket spam
+      }
     } finally {
       setLoading(false);
     }
