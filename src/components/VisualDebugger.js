@@ -49,7 +49,7 @@ export default function VisualDebugger({ enabled, onFixRequest }) {
         rect,
         path,
         tagName: element.tagName.toLowerCase(),
-        className: element.className || '',
+        className: typeof element.className === 'string' ? element.className : (element.className?.baseVal || ''),
         styles: {
           color: computedStyles.color,
           backgroundColor: computedStyles.backgroundColor,
@@ -180,7 +180,7 @@ export default function VisualDebugger({ enabled, onFixRequest }) {
             {/* Element info tooltip */}
             <div className="absolute -top-8 left-0 bg-blue-600 text-white text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap">
               {hoveredElement.tagName}
-              {hoveredElement.className && `.${hoveredElement.className.split(' ')[0]}`}
+              {hoveredElement.className && typeof hoveredElement.className === 'string' && hoveredElement.className.trim() && `.${hoveredElement.className.split(' ')[0]}`}
             </div>
           </div>
         )}

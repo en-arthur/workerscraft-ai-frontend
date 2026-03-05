@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Check, Zap, Sparkles, Crown } from 'lucide-react';
+import { Check, Sparkles, Crown } from 'lucide-react';
 import { getAuthToken } from '@/lib/api';
 
 export default function PricingPage() {
@@ -38,32 +38,13 @@ export default function PricingPage() {
 
   const tiers = [
     {
-      name: 'Free',
-      price: '$0',
-      period: '',
-      description: 'Perfect for trying out Workerscraft',
-      features: [
-        '1 Lifetime Build',
-        'Web & Mobile Apps',
-        'AI Chat Assistant',
-        'Live Preview',
-        'E2B Sandbox Environment',
-        'Deploy via Vercel',
-        'Export as ZIP',
-      ],
-      cta: 'Get Started',
-      ctaLink: '/auth/signup',
-      highlighted: false,
-      icon: Zap,
-      tier: 'free',
-    },
-    {
       name: 'Starter',
       price: '$30',
       period: '/month',
-      description: 'For developers building multiple projects',
+      description: 'For individuals building multiple software projects',
       features: [
         '10 Builds per Month',
+        'AI Chat Assistant',
         'Chat-based Iteration',
         'Supabase Backend',
         'Visual Debugger',
@@ -86,6 +67,7 @@ export default function PricingPage() {
       description: 'For power users and teams',
       features: [
         'Unlimited Builds',
+        'AI Chat Assistant',
         'Priority Support',
         'All Starter Features',
         'Advanced Analytics',
@@ -103,7 +85,7 @@ export default function PricingPage() {
   ];
 
   const handleCTAClick = (tier) => {
-    if (tier.polarCheckoutUrl && currentTier && currentTier !== 'free') {
+    if (tier.polarCheckoutUrl && currentTier) {
       // Redirect to Polar checkout for paid tiers
       window.location.href = tier.polarCheckoutUrl;
     } else {
@@ -157,12 +139,12 @@ export default function PricingPage() {
             Simple, Transparent Pricing
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Choose the plan that fits your needs. Start free and upgrade as you grow.
+            Choose the plan that fits your needs.Upgrade as you grow.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-5xl mx-auto">
           {tiers.map((tier) => {
             const Icon = tier.icon;
             const isCurrentTier = !isLoading && currentTier === tier.tier;
@@ -248,7 +230,6 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b-2 border-gray-800">
                   <th className="text-left py-4 px-4 text-white font-semibold">Feature</th>
-                  <th className="text-center py-4 px-4 text-white font-semibold">Free</th>
                   <th className="text-center py-4 px-4 text-white font-semibold">Starter</th>
                   <th className="text-center py-4 px-4 text-white font-semibold">Max</th>
                 </tr>
@@ -256,7 +237,6 @@ export default function PricingPage() {
               <tbody className="divide-y divide-gray-800">
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Monthly Builds</td>
-                  <td className="text-center py-4 px-4 text-gray-400">1 Lifetime</td>
                   <td className="text-center py-4 px-4 text-gray-400">10</td>
                   <td className="text-center py-4 px-4 text-gray-400">Unlimited</td>
                 </tr>
@@ -264,11 +244,9 @@ export default function PricingPage() {
                   <td className="py-4 px-4 text-gray-300">Web & Mobile Apps</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">AI Chat Assistant</td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
@@ -276,35 +254,29 @@ export default function PricingPage() {
                   <td className="py-4 px-4 text-gray-300">Live Preview</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
-                  <td className="py-4 px-4 text-gray-300">Deploy via Vercel</td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
+                  <td className="py-4 px-4 text-gray-300">Deploy to Web</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Supabase Backend</td>
-                  <td className="text-center py-4 px-4 text-gray-600">—</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Visual Debugger</td>
-                  <td className="text-center py-4 px-4 text-gray-600">—</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Custom Domain Deployment</td>
-                  <td className="text-center py-4 px-4 text-gray-600">—</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Priority Support</td>
-                  <td className="text-center py-4 px-4 text-gray-600">—</td>
                   <td className="text-center py-4 px-4 text-gray-600">—</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>

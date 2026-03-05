@@ -172,7 +172,6 @@ export default function SettingsPage() {
 
   const getTierDisplayName = (tier) => {
     const tierMap = {
-      'free': 'Free',
       'starter': 'Starter',
       'max': 'Max',
     };
@@ -260,7 +259,6 @@ export default function SettingsPage() {
               </span>
             </div>
             <div className="text-sm text-gray-500">
-              {user?.subscription_tier === 'free' && 'Upgrade to get more builds'}
               {user?.subscription_tier === 'starter' && 'Resets monthly'}
               {user?.subscription_tier === 'max' && 'Unlimited builds'}
             </div>
@@ -292,7 +290,7 @@ export default function SettingsPage() {
                   rel="noopener noreferrer"
                   className="block px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-center font-medium rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-colors"
                 >
-                  {user?.subscription_tier === 'free' ? 'Upgrade to Starter' : 'Downgrade to Starter'}
+                  {user?.subscription_tier === 'max' ? 'Downgrade to Starter' : 'Upgrade to Starter'}
                 </a>
               )}
               {user?.subscription_tier !== 'max' && (

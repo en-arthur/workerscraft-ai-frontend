@@ -192,4 +192,10 @@ export const projectsAPI = {
   getDeploymentStatus: async (deploymentId) => {
     return apiRequest(`/projects/deployments/${deploymentId}/status`);
   },
+  
+  resumeProject: async (projectId) => {
+    return apiRequest(`/projects/${projectId}/resume`, {
+      method: 'POST',
+    });
+  },
 };

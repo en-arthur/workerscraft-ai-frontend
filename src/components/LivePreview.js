@@ -9,8 +9,9 @@ import { useState, useEffect, useRef } from 'react';
  * @param {string|null} props.previewUrl - URL of the preview (null if not ready)
  * @param {'web'|'mobile'} props.applicationType - Type of application
  * @param {Function} props.onElementClick - Optional callback for element clicks (for Visual Debugger)
+ * @param {Function} props.onSandboxExpired - Optional callback when sandbox is expired/not found
  */
-export default function LivePreview({ previewUrl, applicationType, onElementClick }) {
+export default function LivePreview({ previewUrl, applicationType, onElementClick, onSandboxExpired }) {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const iframeRef = useRef(null);
@@ -32,20 +33,68 @@ export default function LivePreview({ previewUrl, applicationType, onElementClic
 
   const handleIframeError = () => {
     setIsLoading(false);
-    setError('Failed to load preview. The application may still be starting up.');
+    setError('Failed to load preview. The sandbox may have expired.');
   };
+  
+  // Check if iframe content shows "Sandbox Not Found" error and auto-restore
+  useEffect(() => {
+    if (!iframeRef.current || !previewUrl) {
+      console.log('[LivePreview] Skipping sandbox check - no iframe or preview URL');
+      return;
+    }
+    
+    console.log('[LivePreview] Setting up sandbox status check for:', previewUrl);
+    
+    const checkSandboxStatus = () => {
+      console.log('[LivePreview] Checking sandbox status...');
+      try {
+        const iframeDoc = iframeRef.current.contentDocument || iframeRef.current.contentWindow?.document;
+        if (iframeDoc) {
+          const bodyText = iframeDoc.body?.innerText || '';
+          console.log('[LivePreview] Iframe body text (first 200 chars):', bodyText.substring(0, 200));
+          
+          if (bodyText.includes('Sandbox Not Found') || bodyText.includes("wasn't found")) {
+            console.log('[LivePreview] SANDBOX EXPIRED DETECTED! Triggering auto-restore...');
+            setError('Sandbox expired. Restoring automatically...');
+            setIsLoading(true);
+            
+            // Trigger auto-restore if callback is provided
+            if (onSandboxExpired) {
+              console.log('[LivePreview] Calling onSandboxExpired callback');
+              onSandboxExpired();
+            } else {
+              console.warn('[LivePreview] No onSandboxExpired callback provided!');
+            }
+          } else {
+            console.log('[LivePreview] Sandbox appears to be running normally');
+          }
+        } else {
+          console.log('[LivePreview] Cannot access iframe document (cross-origin)');
+        }
+      } catch (e) {
+        console.log('[LivePreview] Error checking sandbox status (expected for cross-origin):', e.message);
+      }
+    };
+    
+    // Check after iframe loads
+    const timer = setTimeout(checkSandboxStatus, 2000);
+    return () => {
+      console.log('[LivePreview] Cleaning up sandbox check timer');
+      clearTimeout(timer);
+    };
+  }, [previewUrl, onSandboxExpired]);
 
   if (!previewUrl) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
+      <div className="w-full h-full flex items-center justify-center bg-gray-900">
         <div className="text-center">
           <div className="text-gray-400 mb-2">
             <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <p className="text-gray-500">Preview not available yet</p>
-          <p className="text-sm text-gray-400 mt-1">Waiting for build to start...</p>
+          <p className="text-gray-400">Preview not available yet</p>
+          <p className="text-sm text-gray-500 mt-1">Waiting for build to start...</p>
         </div>
       </div>
     );
@@ -54,7 +103,7 @@ export default function LivePreview({ previewUrl, applicationType, onElementClic
   // Render web application preview in iframe
   if (applicationType === 'web') {
     return (
-      <div className="w-full h-full relative bg-white rounded-lg overflow-hidden shadow-lg">
+      <div className="w-full h-full relative bg-white overflow-hidden">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-90 z-10">
             <div className="text-center">
@@ -65,26 +114,65 @@ export default function LivePreview({ previewUrl, applicationType, onElementClic
         )}
         
         {error && (
-          <div className="absolute inset-0 flex items-center justify-center bg-red-50 z-10">
-            <div className="text-center p-6">
-              <div className="text-red-600 mb-2">
-                <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <p className="text-red-700 font-medium">{error}</p>
-              <button
-                onClick={() => {
-                  setError('');
-                  setIsLoading(true);
-                  if (iframeRef.current) {
-                    iframeRef.current.src = previewUrl;
-                  }
-                }}
-                className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-              >
-                Retry
-              </button>
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-900/95 z-10">
+            <div className="text-center p-6 max-w-md">
+              {error.includes('Restoring') || error.includes('Restored') || error.includes('Reloading') ? (
+                <>
+                  <div className="text-blue-400 mb-4">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div>
+                  </div>
+                  <p className="text-white font-medium mb-2">
+                    {error.includes('Restored') ? 'Restoration Complete' : 'Restoring Sandbox'}
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    {error}
+                  </p>
+                </>
+              ) : error.includes('template defaults') ? (
+                <>
+                  <div className="text-yellow-400 mb-4">
+                    <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  </div>
+                  <p className="text-yellow-400 font-medium mb-2">Sandbox Provisioned</p>
+                  <p className="text-sm text-gray-400 mb-4">
+                    {error}
+                  </p>
+                  <button
+                    onClick={() => setError('')}
+                    className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                  >
+                    Dismiss
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div className="text-red-400 mb-2">
+                    <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <p className="text-red-400 font-medium mb-2">{error}</p>
+                  {error.includes('Failed to restore') && (
+                    <p className="text-sm text-gray-400 mb-4">
+                      Automatic restoration failed. Please start a new build from the dashboard.
+                    </p>
+                  )}
+                  <button
+                    onClick={() => {
+                      setError('');
+                      setIsLoading(true);
+                      if (iframeRef.current) {
+                        iframeRef.current.src = previewUrl;
+                      }
+                    }}
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                  >
+                    Try Again
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -105,7 +193,7 @@ export default function LivePreview({ previewUrl, applicationType, onElementClic
   // Render mobile application preview in mobile frame with webview
   if (applicationType === 'mobile') {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg p-8">
+      <div className="w-full h-full flex items-center justify-center bg-gray-900 p-8">
         {/* Mobile device frame */}
         <div className="relative bg-gray-900 rounded-[3rem] p-3 shadow-2xl" style={{ width: '375px', height: '667px' }}>
           {/* Notch */}

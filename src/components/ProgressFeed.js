@@ -69,8 +69,14 @@ export default function ProgressFeed({ projectId, websocketUrl }) {
         };
 
         ws.onerror = (error) => {
-          console.error('WebSocket error:', error);
-          setConnectionError('Connection error occurred');
+          // WebSocket errors often have empty error objects - only log if there's actual error info
+          if (error && error.message) {
+            console.error('WebSocket error:', error);
+            setConnectionError('Connection error occurred');
+          } else {
+            // Benign error (empty error object) - just log for debugging
+            console.debug('WebSocket error event (benign):', error);
+          }
         };
 
         ws.onclose = () => {

@@ -30,7 +30,7 @@ export default function ProjectDashboard({ user }) {
   };
 
   const handleProjectClick = (projectId) => {
-    router.push(`/projects/${projectId}`);
+    router.push(`/workspace/${projectId}`);
   };
 
   const handleDeleteClick = (e, projectId) => {
@@ -117,7 +117,34 @@ export default function ProjectDashboard({ user }) {
       <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 rounded-2xl p-6 shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex-1">
-            <h2 className="text-2xl font-semibold text-white mb-2">Your Account</h2>
+            <div className="flex items-center gap-3 mb-2">
+              <h2 className="text-2xl font-semibold text-white">Your Account</h2>
+              <button
+                onClick={() => router.push('/settings')}
+                className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                title="Account Settings"
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </button>
+            </div>
             <div className="flex items-center gap-4 text-sm text-gray-400">
               <div className="flex items-center gap-2">
                 <svg
@@ -150,16 +177,16 @@ export default function ProjectDashboard({ user }) {
                     d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
                   />
                 </svg>
-                <span className="font-medium capitalize text-gray-300">{user?.subscription_tier || 'Free'} Plan</span>
+                <span className="font-medium capitalize text-gray-300">{user?.subscription_tier || 'Starter'} Plan</span>
               </div>
             </div>
           </div>
           <div className="text-right pl-6 border-l border-gray-700">
             <p className="text-sm font-medium text-gray-400 mb-1">Builds Remaining</p>
-            <p className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <p className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               {user?.builds_remaining === null ? '∞' : user?.builds_remaining ?? 0}
             </p>
-            {user?.subscription_tier === 'free' && user?.builds_remaining === 0 && (
+            {user?.builds_remaining === 0 && (
               <button
                 onClick={() => router.push('/pricing')}
                 className="mt-2 text-xs text-blue-400 hover:text-blue-300 font-medium transition-colors"

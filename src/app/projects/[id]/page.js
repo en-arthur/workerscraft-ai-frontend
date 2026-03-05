@@ -78,10 +78,10 @@ export default function ProjectDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-950">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <div className="text-gray-600">Loading project...</div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto mb-4"></div>
+          <div className="text-gray-400">Loading project...</div>
         </div>
       </div>
     );
@@ -89,12 +89,12 @@ export default function ProjectDetailPage() {
 
   if (error && !project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-950">
         <div className="text-center">
-          <div className="text-red-600 mb-4">{error}</div>
+          <div className="text-red-400 mb-4">{error}</div>
           <button
             onClick={() => router.push('/dashboard')}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all"
           >
             Back to Dashboard
           </button>
@@ -114,15 +114,15 @@ export default function ProjectDetailPage() {
   const previewUrl = project?.sandbox_id ? project.preview_url : null;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-950 flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow-sm flex-shrink-0">
+      <header className="bg-gray-900 border-b border-gray-800 flex-shrink-0">
         <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.push('/dashboard')}
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-gray-400 hover:text-cyan-400 transition-colors"
                 title="Back to Dashboard"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,15 +130,15 @@ export default function ProjectDetailPage() {
                 </svg>
               </button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">{project?.name}</h1>
-                <p className="text-sm text-gray-500 mt-0.5">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{project?.name}</h1>
+                <p className="text-sm text-gray-400 mt-0.5">
                   <span className="capitalize">{project?.application_type}</span>
                   {' • '}
                   <span className={`font-medium ${
-                    project?.status === 'ready' ? 'text-green-600' :
-                    project?.status === 'building' ? 'text-blue-600' :
-                    project?.status === 'failed' ? 'text-red-600' :
-                    'text-gray-600'
+                    project?.status === 'ready' ? 'text-green-400' :
+                    project?.status === 'building' ? 'text-cyan-400' :
+                    project?.status === 'failed' ? 'text-red-400' :
+                    'text-gray-400'
                   }`}>
                     {project?.status}
                   </span>
@@ -157,10 +157,10 @@ export default function ProjectDetailPage() {
                   
                   <button
                     onClick={() => setChatVisible(!chatVisible)}
-                    className={`px-4 py-2 font-medium rounded-lg transition-colors flex items-center gap-2 ${
+                    className={`px-4 py-2 font-medium rounded-lg transition-all flex items-center gap-2 ${
                       chatVisible
-                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500'
+                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                     }`}
                     title="Toggle Chat"
                   >
@@ -172,10 +172,10 @@ export default function ProjectDetailPage() {
                   
                   <button
                     onClick={() => setDebuggerEnabled(!debuggerEnabled)}
-                    className={`px-4 py-2 font-medium rounded-lg transition-colors flex items-center gap-2 ${
+                    className={`px-4 py-2 font-medium rounded-lg transition-all flex items-center gap-2 ${
                       debuggerEnabled
                         ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:from-cyan-500 hover:to-blue-500'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                     }`}
                     title="Toggle Visual Debugger"
                   >
@@ -191,7 +191,7 @@ export default function ProjectDetailPage() {
                 <button
                   onClick={handleStartBuild}
                   disabled={buildStarting}
-                  className="px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {buildStarting ? (
                     <>
@@ -217,7 +217,7 @@ export default function ProjectDetailPage() {
       {/* Error Message */}
       {error && (
         <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+          <div className="p-4 bg-red-900/20 border border-red-500/30 rounded-lg text-sm text-red-400">
             {error}
           </div>
         </div>
@@ -228,37 +228,37 @@ export default function ProjectDetailPage() {
         {!showLiveView ? (
           // Show project details when not building
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-xl p-6">
               <div className="mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Project Details</h2>
-                <p className="text-gray-600">{project?.description}</p>
+                <h2 className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-3">Project Details</h2>
+                <p className="text-base text-gray-300 leading-relaxed">{project?.description}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <p className="text-sm text-gray-500">Application Type</p>
-                  <p className="text-lg font-medium capitalize">{project?.application_type}</p>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Application Type</p>
+                  <p className="text-lg font-semibold text-gray-200 capitalize">{project?.application_type}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Status</p>
-                  <p className="text-lg font-medium capitalize">{project?.status}</p>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Status</p>
+                  <p className="text-lg font-semibold text-gray-200 capitalize">{project?.status}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Supabase Backend</p>
-                  <p className="text-lg font-medium">{project?.enable_supabase ? 'Enabled' : 'Disabled'}</p>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Supabase Backend</p>
+                  <p className="text-lg font-semibold text-gray-200">{project?.enable_supabase ? 'Enabled' : 'Disabled'}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Created</p>
-                  <p className="text-lg font-medium">
+                  <p className="text-sm font-medium text-gray-500 mb-1">Created</p>
+                  <p className="text-lg font-semibold text-gray-200">
                     {project?.created_at ? new Date(project.created_at).toLocaleDateString() : 'N/A'}
                   </p>
                 </div>
               </div>
 
               {project?.status === 'failed' && (
-                <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-700 font-medium">Build failed</p>
-                  <p className="text-sm text-red-600 mt-1">
+                <div className="mt-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+                  <p className="text-red-400 font-medium">Build failed</p>
+                  <p className="text-sm text-red-400/80 mt-1">
                     The build process encountered an error. You can try starting a new build.
                   </p>
                 </div>
@@ -287,7 +287,7 @@ export default function ProjectDetailPage() {
             {/* Chat Interface - Middle (when visible) */}
             {chatVisible && project?.status === 'ready' && (
               <div className="flex-shrink-0" style={{ width: '30%', minWidth: '350px' }}>
-                <div className="h-full bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="h-full bg-gray-900 border border-gray-800 rounded-lg shadow-xl overflow-hidden">
                   <ChatInterface
                     projectId={projectId}
                     visible={chatVisible}

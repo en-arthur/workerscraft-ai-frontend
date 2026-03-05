@@ -66,7 +66,7 @@ export default function ChatInterface({ projectId, visible, onSendMessage }) {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -76,18 +76,18 @@ export default function ChatInterface({ projectId, visible, onSendMessage }) {
   if (!visible) return null;
 
   return (
-    <div className="flex flex-col h-full bg-white border-l border-gray-200">
+    <div className="flex flex-col h-full bg-gray-900 overflow-hidden">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900">Chat with Architect</h3>
-        <p className="text-sm text-gray-500">Request changes to your application</p>
+      <div className="flex-shrink-0 px-4 py-3 border-b border-gray-800">
+        <h3 className="text-lg font-semibold text-white">Chat with Architect</h3>
+        <p className="text-sm text-gray-400">Request changes to your application</p>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Messages - Scrollable Container */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
         {messages.length === 0 && (
           <div className="text-center text-gray-500 mt-8">
-            <p className="text-sm">Start a conversation with the Master Architect Agent</p>
+            <p className="text-sm">Start a conversation with Workerscraft AI Agent</p>
             <p className="text-xs mt-2">Ask for changes, improvements, or new features</p>
           </div>
         )}
@@ -100,8 +100,8 @@ export default function ChatInterface({ projectId, visible, onSendMessage }) {
             <div
               className={`max-w-[80%] rounded-lg px-4 py-2 ${
                 message.role === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-900'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white'
+                  : 'bg-gray-800 text-gray-100'
               }`}
             >
               <div className="text-sm whitespace-pre-wrap">{message.content}</div>
@@ -119,10 +119,10 @@ export default function ChatInterface({ projectId, visible, onSendMessage }) {
         {/* Typing indicator */}
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg px-4 py-2">
+            <div className="bg-gray-800 rounded-lg px-4 py-2">
               <div className="flex items-center space-x-2">
-                <Loader2 className="w-4 h-4 animate-spin text-gray-600" />
-                <span className="text-sm text-gray-600">Architect is thinking...</span>
+                <Loader2 className="w-4 h-4 animate-spin text-gray-400" />
+                <span className="text-sm text-gray-400">Architect is thinking...</span>
               </div>
             </div>
           </div>
@@ -131,23 +131,23 @@ export default function ChatInterface({ projectId, visible, onSendMessage }) {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <div className="p-4 border-t border-gray-200">
+      {/* Input - Fixed at Bottom */}
+      <div className="flex-shrink-0 p-4 border-t border-gray-800">
         <div className="flex space-x-2">
           <textarea
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             placeholder="Describe the changes you want..."
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             rows={3}
             disabled={isTyping}
           />
           <button
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isTyping}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+            className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg hover:from-blue-700 hover:to-cyan-700 disabled:bg-gray-700 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
           >
             {isTyping ? (
               <Loader2 className="w-5 h-5 animate-spin" />

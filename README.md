@@ -1,6 +1,6 @@
 # Workerscraft Frontend
 
-Next.js 14 frontend dashboard for the Workerscraft platform.
+Next.js 16 frontend dashboard for the Workerscraft platform.
 
 ## Setup
 
@@ -20,7 +20,7 @@ npm run dev
 
 ## Tech Stack
 
-- Next.js 14 (App Router)
+- Next.js 16 (App Router)
 - React 18
 - JavaScript
 - Tailwind CSS
