@@ -41,7 +41,7 @@ export default function PricingPage() {
       name: 'Starter',
       price: '$30',
       period: '/month',
-      description: 'For individuals building multiple software projects',
+      description: 'For individuals building software projects',
       features: [
         '10 Builds per Month',
         'AI Chat Assistant',
@@ -55,10 +55,32 @@ export default function PricingPage() {
       ],
       cta: 'Get Started',
       ctaLink: '/auth/signup',
-      polarCheckoutUrl: 'https://polar.sh/workerscraft/starter', // Replace with actual Polar URL
-      highlighted: true,
+      polarCheckoutUrl: 'https://polar.sh/workerscraft/starter',
+      highlighted: false,
       icon: Sparkles,
       tier: 'starter',
+    },
+    {
+      name: 'Pro',
+      price: '$50',
+      period: '/month',
+      description: 'For professionals building multiple projects',
+      features: [
+        '30 Builds per Month',
+        'All Starter Features',
+        'Priority Support',
+        'Advanced Analytics',
+        'Team Collaboration',
+        'Custom Integrations',
+        'Extended Sandbox Time',
+        'Premium Templates',
+      ],
+      cta: 'Get Started',
+      ctaLink: '/auth/signup',
+      polarCheckoutUrl: 'https://polar.sh/workerscraft/pro',
+      highlighted: true,
+      icon: Sparkles,
+      tier: 'pro',
     },
     {
       name: 'Max',
@@ -67,17 +89,17 @@ export default function PricingPage() {
       description: 'For power users and teams',
       features: [
         'Unlimited Builds',
-        'AI Chat Assistant',
+        'All Pro Features',
         'Priority Support',
-        'All Starter Features',
-        'Advanced Analytics',
         'Dedicated Resources',
         'Early Access to Features',
         'Premium Support Channel',
+        'Custom SLA',
+        'White-label Options',
       ],
       cta: 'Get Started',
       ctaLink: '/auth/signup',
-      polarCheckoutUrl: 'https://polar.sh/workerscraft/max', // Replace with actual Polar URL
+      polarCheckoutUrl: 'https://polar.sh/workerscraft/max',
       highlighted: false,
       icon: Crown,
       tier: 'max',
@@ -144,7 +166,7 @@ export default function PricingPage() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
           {tiers.map((tier) => {
             const Icon = tier.icon;
             const isCurrentTier = !isLoading && currentTier === tier.tier;
@@ -231,6 +253,7 @@ export default function PricingPage() {
                 <tr className="border-b-2 border-gray-800">
                   <th className="text-left py-4 px-4 text-white font-semibold">Feature</th>
                   <th className="text-center py-4 px-4 text-white font-semibold">Starter</th>
+                  <th className="text-center py-4 px-4 text-white font-semibold">Pro</th>
                   <th className="text-center py-4 px-4 text-white font-semibold">Max</th>
                 </tr>
               </thead>
@@ -238,10 +261,12 @@ export default function PricingPage() {
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Monthly Builds</td>
                   <td className="text-center py-4 px-4 text-gray-400">10</td>
+                  <td className="text-center py-4 px-4 text-gray-400">30</td>
                   <td className="text-center py-4 px-4 text-gray-400">Unlimited</td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Web & Mobile Apps</td>
+                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
@@ -249,14 +274,11 @@ export default function PricingPage() {
                   <td className="py-4 px-4 text-gray-300">AI Chat Assistant</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
+                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Live Preview</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-4 text-gray-300">Deploy to Web</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
@@ -264,19 +286,17 @@ export default function PricingPage() {
                   <td className="py-4 px-4 text-gray-300">Supabase Backend</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-4 text-gray-300">Visual Debugger</td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-4 text-gray-300">Custom Domain Deployment</td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-gray-300">Priority Support</td>
+                  <td className="text-center py-4 px-4 text-gray-600">—</td>
+                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
+                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 text-gray-300">Dedicated Resources</td>
+                  <td className="text-center py-4 px-4 text-gray-600">—</td>
                   <td className="text-center py-4 px-4 text-gray-600">—</td>
                   <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-400 mx-auto" /></td>
                 </tr>

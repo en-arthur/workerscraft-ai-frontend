@@ -92,52 +92,76 @@ export default function Home() {
           
         </div>
 
-        {/* How it works */}
+        {/* App Demo */}
         <div className="py-24 border-t border-gray-800">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">
-              How it works
+              See it in action
             </h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              From idea to production in minutes, not months
+              Watch how Workerscraft builds a complete application from a simple description
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-xl">1</span>
+          <div className="max-w-5xl mx-auto">
+            {/* Demo Video/Screenshot Placeholder */}
+            <div className="relative bg-gray-900/50 border border-gray-800 rounded-2xl overflow-hidden aspect-video">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-400 text-lg">Demo video coming soon</p>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
-                Describe your app
-              </h3>
-              <p className="text-gray-400">
-                Tell us what you want to build in natural language. No technical knowledge required.
-              </p>
             </div>
-
-            <div className="text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-xl">2</span>
+            
+            {/* Demo Features */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Instant Generation
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  From prompt to working app in under 60 seconds
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
-                AI builds it
-              </h3>
-              <p className="text-gray-400">
-                Our Master Architect Agent plans, codes, and tests your application automatically.
-              </p>
-            </div>
 
-            <div className="text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-xl">3</span>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Live Preview
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  See changes in real-time as AI builds your app
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
-                Deploy instantly
-              </h3>
-              <p className="text-gray-400">
-                Preview, iterate, and deploy your app to production with one click.
-              </p>
+
+              <div className="text-center">
+                <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Chat to Refine
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Iterate and improve through natural conversation
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -251,34 +275,31 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             
             {/* Starter Tier */}
-            <div className="bg-white p-8 rounded-xl relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-semibold rounded-full">
-                POPULAR
-              </div>
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Starter</h3>
+            <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-xl">
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-white mb-2">Starter</h3>
                 <div className="flex items-baseline">
-                  <span className="text-4xl font-bold text-gray-900">$30</span>
-                  <span className="text-gray-500 ml-2">/mo</span>
+                  <span className="text-3xl font-bold text-white">$30</span>
+                  <span className="text-gray-400 ml-2">/mo</span>
                 </div>
               </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start text-sm text-gray-600">
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-start text-sm text-gray-400">
                   <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  10 builds per month
+                  10 builds/month
                 </li>
-                <li className="flex items-start text-sm text-gray-600">
+                <li className="flex items-start text-sm text-gray-400">
                   <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Chat-based iteration
+                  AI chat assistant
                 </li>
-                <li className="flex items-start text-sm text-gray-600">
+                <li className="flex items-start text-sm text-gray-400">
                   <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -287,22 +308,62 @@ export default function Home() {
               </ul>
               <Link
                 href="/auth/signup"
-                className="block w-full text-center px-6 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-all"
+                className="block w-full text-center px-6 py-2 border border-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-all"
+              >
+                Get started
+              </Link>
+            </div>
+
+            {/* Pro Tier */}
+            <div className="bg-white p-6 rounded-xl relative transform md:scale-105">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-semibold rounded-full">
+                POPULAR
+              </div>
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Pro</h3>
+                <div className="flex items-baseline">
+                  <span className="text-3xl font-bold text-gray-900">$50</span>
+                  <span className="text-gray-500 ml-2">/mo</span>
+                </div>
+              </div>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-start text-sm text-gray-600">
+                  <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  30 builds/month
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  All Starter features
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Priority support
+                </li>
+              </ul>
+              <Link
+                href="/auth/signup"
+                className="block w-full text-center px-6 py-2 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-all"
               >
                 Get started
               </Link>
             </div>
 
             {/* Max Tier */}
-            <div className="bg-gray-900/50 border border-gray-800 p-8 rounded-xl">
-              <div className="mb-8">
+            <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-xl">
+              <div className="mb-6">
                 <h3 className="text-lg font-semibold text-white mb-2">Max</h3>
                 <div className="flex items-baseline">
-                  <span className="text-4xl font-bold text-white">$100</span>
+                  <span className="text-3xl font-bold text-white">$100</span>
                   <span className="text-gray-400 ml-2">/mo</span>
                 </div>
               </div>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2 mb-6">
                 <li className="flex items-start text-sm text-gray-400">
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -313,18 +374,18 @@ export default function Home() {
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Priority support
+                  All Pro features
                 </li>
                 <li className="flex items-start text-sm text-gray-400">
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  All features
+                  Dedicated resources
                 </li>
               </ul>
               <Link
                 href="/auth/signup"
-                className="block w-full text-center px-6 py-2.5 border border-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-all"
+                className="block w-full text-center px-6 py-2 border border-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-all"
               >
                 Get started
               </Link>

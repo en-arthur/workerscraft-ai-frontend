@@ -262,8 +262,6 @@ export default function WorkspacePage() {
       // Show different messages based on whether files were restored
       if (response.files_restored > 0) {
         setError(`Restored ${response.files_restored} files. Reloading preview...`);
-      } else {
-        setError('Sandbox provisioned with template defaults. Use chat to rebuild or start a new build.');
       }
       
       console.log('[Workspace] Reloading project data...');
